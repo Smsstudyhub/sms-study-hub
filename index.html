@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SMS Study Hub - free study notes, courses and practice quizzes.">
+<title>SMS Study Hub | Learn. Practice. Succeed.</title>
+<style>
+:root {
+  --blue: #155eef;
+  --dark: #10244b;
+  --light: #f2f6ff;
+  --white: #ffffff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--dark);
+  background: #f8faff;
+  line-height: 1.6;
+}
+header {
+  background: var(--white);
+  padding: 16px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e4eaff;
+}
+.logo { font-size: 23px; font-weight: 800; color: var(--blue); }
+nav a {
+  color: var(--dark);
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: 600;
+}
+.hero {
+  padding: 65px 7%;
+  background: linear-gradient(135deg, #eaf1ff, #fff);
+  text-align: center;
+}
+.hero h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.15; }
+.hero p { max-width: 620px; margin: 18px auto; color: #53627b; }
+.btn {
+  display: inline-block;
+  border: 0;
+  border-radius: 9px;
+  background: var(--blue);
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+section { padding: 35px 6%; }
+h2 { font-size: 27px; }
+.search {
+  width: 100%;
+  max-width: 520px;
+  padding: 13px;
+  border: 1px solid #ccd7ee;
+  border-radius: 9px;
+  font-size: 16px;
+}
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
+.filters button {
+  border: 1px solid #d7e1f5;
+  background: white;
+  padding: 9px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.filters button.active { background: var(--blue); color: white; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: white;
+  border: 1px solid #e5eaf5;
+  padding: 22px;
+  border-radius: 15px;
+  box-shadow: 0 4px 16px #152e5910;
+}
+.card .emoji { font-size: 35px; }
+.card h3 { margin-bottom: 8px; }
+.card p { color: #65728a; }
+.tag {
+  display: inline-block;
+  background: #eaf1ff;
+  color: #155eef;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.card a { color: var(--blue); font-weight: bold; }
+.quiz-box {
+  background: white;
+  border: 1px solid #e5eaf5;
+  padding: 24px;
+  border-radius: 15px;
+  max-width: 680px;
+}
+.quiz-box button.answer {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  background: #f2f6ff;
+  border: 1px solid #dce5fa;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+}
+.quiz-box button.answer:hover { border-color: var(--blue); }
+#quiz-result { font-weight: bold; margin-top: 12px; }
+footer {
+  background: #10244b;
+  color: white;
+  padding: 25px;
+  text-align: center;
+}
+footer a { color: white; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">📘 SMS Study Hub</div>
+  <nav>
+    <a href="#courses">Courses</a>
+    <a href="#notes">Notes</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>Your journey to better learning starts here.</h1>
+    <p>Explore study resources, learn new concepts and practice
+       with quizzes — all in one place.</p>
+    <a class="btn" href="#courses">Explore Courses</a>
+  </div>
+
+  <section id="courses">
+    <h2>📚 Explore Courses</h2>
+    <p>Find a subject to start learning.</p>
+    <input id="search" class="search" type="search"
+      placeholder="Search courses..." aria-label="Search courses">
+
+    <div class="filters">
+      <button class="active" data-filter="All">All</button>
+      <button data-filter="School">School</button>
+      <button data-filter="College">College</button>
+      <button data-filter="Competitive">Competitive Exams</button>
+    </div>
+
+    <div class="grid" id="course-list">
+      <article class="card" data-category="School">
+        <div class="emoji">🔢</div>
+        <span class="tag">School</span>
+        <h3>Mathematics</h3>
+        <p>Practice formulas, calculations and problem-solving.</p>
+        <a href="#quiz">Try a sample quiz →</a>
+      </article>
+
+      <article class="card" data-category="School">
+        <div class="emoji">🔬</div>
+        <span class="tag">School</span>
+        <h3>Science</h3>
+        <p>Explore physics, chemistry and biology topics.</p>
+        <a href="#notes">Explore resources →</a>
+      </article>
+
+      <article class="card" data-category="College">
+        <div class="emoji">💻</div>
+        <span class="tag">College</span>
+        <h3>Computer Basics</h3>
+        <p>Learn about computers, the web and programming.</p>
+        <a href="#notes">Explore resources →</a>
+      </article>
+
+      <article class="card" data-category="Competitive">
+        <div class="emoji">🎯</div>
+        <span class="tag">Competitive</span>
+        <h3>General Knowledge</h3>
+        <p>Build your knowledge and practice for exams.</p>
+        <a href="#notes">Explore resources →</a>
+      </article>
+    </div>
+    <p id="no-results" hidden>No matching courses found.</p>
+  </section>
+
+  <section id="notes">
+    <h2>📝 Study Notes & Resources</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="emoji">📄</div>
+        <h3>Mathematics Notes</h3>
+        <p>Add your PDF link here when your notes are ready.</p>
+        <a href="https://drive.google.com/"
+           target="_blank" rel="noopener">Open Google Drive →</a>
+      </article>
+      <article class="card">
+        <div class="emoji">🎬</div>
+        <h3>Video Lessons</h3>
+        <p>Find educational video lessons for your subjects.</p>
+        <a href="https://www.youtube.com/education"
+           target="_blank" rel="noopener">Explore videos →</a>
+      </article>
+      <article class="card">
+        <div class="emoji">📖</div>
+        <h3>Free Learning</h3>
+        <p>Explore free educational materials and lessons.</p>
+        <a href="https://www.khanacademy.org/"
+           target="_blank" rel="noopener">Start learning →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <h2>🧠 Quick Practice Quiz</h2>
+    <div class="quiz-box">
+      <p id="question-count">Question 1 of 3</p>
+      <h3 id="question">Loading question...</h3>
+      <div id="answers"></div>
+      <p id="quiz-result" aria-live="polite"></p>
+      <button class="btn" id="next" hidden>Next Question</button>
+      <button class="btn" id="restart" hidden>Try Again</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p><strong>SMS Study Hub</strong> — Learn. Practice. Succeed.</p>
+  <p>Made for learners, with a commitment to accessible education.</p>
+  <p>Contact: add-your-email@example.com</p>
+</footer>
+
+<script>
+const search = document.getElementById("search");
+const cards = [...document.querySelectorAll("#course-list .card")];
+const filters = [...document.querySelectorAll("[data-filter]")];
+let activeFilter = "All";
+
+function filterCourses() {
+  const term = search.value.toLowerCase().trim();
+  let visible = 0;
+
+  cards.forEach(card => {
+    const matchesText = card.innerText.toLowerCase().includes(term);
+    const matchesCategory = activeFilter === "All" ||
+      card.dataset.category === activeFilter;
+    card.hidden = !(matchesText && matchesCategory);
+    if (!card.hidden) visible++;
+  });
+
+  document.getElementById("no-results").hidden = visible !== 0;
+}
+
+search.addEventListener("input", filterCourses);
+
+filters.forEach(button => {
+  button.addEventListener("click", () => {
+    activeFilter = button.dataset.filter;
+    filters.forEach(item =>
+      item.classList.toggle("active", item === button)
+    );
+    filterCourses();
+  });
+});
+
+const questions = [
+  {
+    q: "What is 12 × 8?",
+    options: ["84", "96", "108", "88"],
+    correct: 1
+  },
+  {
+    q: "Which planet is known as the Red Planet?",
+    options: ["Venus", "Jupiter", "Mars", "Mercury"],
+    correct: 2
+  },
+  {
+    q: "What does HTML help create?",
+    options: [
+      "Web pages",
+      "Electricity",
+      "Computer hardware",
+      "A keyboard"
+    ],
+    correct: 0
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function showQuestion() {
+  answered = false;
+  const item = questions[current];
+  document.getElementById("question-count").textContent =
+    `Question ${current + 1} of ${questions.length}`;
+  document.getElementById("question").textContent = item.q;
+  document.getElementById("quiz-result").textContent = "";
+  document.getElementById("answers").replaceChildren();
+  document.getElementById("next").hidden = true;
+  document.getElementById("restart").hidden = true;
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent = option;
+    button.addEventListener("click", () => selectAnswer(index));
+    document.getElementById("answers").append(button);
+  });
+}
+
+function selectAnswer(index) {
+  if (answered) return;
+  answered = true;
+  const correct = questions[current].correct === index;
+  if (correct) score++;
+
+  document.getElementById("quiz-result").textContent =
+    correct ? "Correct! Well done." :
+    "Not quite. The correct answer is " +
+      questions[current].options[questions[current].correct] + ".";
+
+  document.querySelectorAll(".answer").forEach(button => {
+    button.disabled = true;
+  });
+
+  if (current < questions.length - 1) {
+    document.getElementById("next").hidden = false;
+  } else {
+    document.getElementById("quiz-result").textContent +=
+      ` Final score: ${score}/${questions.length}.`;
+    document.getElementById("restart").hidden = false;
+  }
+}
+
+document.getElementById("next").addEventListener("click", () => {
+  current++;
+  showQuestion();
+});
+
+document.getElementById("restart").addEventListener("click", () => {
+  current = 0;
+  score = 0;
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
